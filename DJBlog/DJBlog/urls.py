@@ -18,6 +18,10 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'article.views.home'),
-    url(r'^(?P<my_args>\d+)/$', 'article.views.detail', name='detail'),
+    url(r'^$', 'article.views.home', name='home'),
+    url(r'^(?P<id>\d+)/$', 'article.views.detail', name='detail'),
+    url(r'^archives/$', 'article.views.archives', name='archives'),
+    url(r'^aboutme/$', 'article.views.about_me', name='about_me'),
+    url(r'^category/(?P<category>\w+)/$', 'article.views.search_category', name = 'search_category'),
+    url(r'^search$','article.views.blog_search', name = 'search'),
 ]

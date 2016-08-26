@@ -1,8 +1,10 @@
 {% extends "base.html" %}
-{% load custom_markdown %}
 
 {% block content %}
 <div class="posts">
+    {% if error %}
+        <h2 class="post-title">No related post topic found.</a></h2>
+    {% else %}
     {% for post in post_list %}
         <section class="post">
             <header class="post-header">
@@ -13,15 +15,8 @@
                         <a class="post-category post-category-js" href="{% url "search_category" category=post.category %}">{{ post.category }}</a>
                     </p>
             </header>
-
-                <div class="post-description">
-                    <p>
-                        {{ post.content|custom_markdown|truncatewords_html:50}}
-                    </p>
-                </div>
-                <a class="pure-button" href="{% url "detail" id=post.id %}">Read More >>> </a>
         </section>
-        <a href="{% url "detail" id=post.id %}#disqus_thread" data-disqus-identifier="post{{post.id}}"></a>
     {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}

@@ -54,8 +54,6 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'DJBlog.urls'
 
-from django.conf import global_settings
-
 TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 
 TEMPLATES = [

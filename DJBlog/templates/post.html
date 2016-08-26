@@ -3,25 +3,22 @@
 
 {% block content %}
 <div class="posts">
-    {% for post in post_list %}
         <section class="post">
             <header class="post-header">
-                <h2 class="post-title"><a href="{% url "detail" id=post.id %}">{{ post.title }}</a></h2>
+                <h2 class="post-title">{{ post.title }}</h2>
 
                     <p class="post-meta">
-                        Time:  <a class="post-time">{{ post.date_time |date:"Y /m /d"}}</a> 
+                        Time:  <a class="post-time">{{ post.date_time|date:"Y /m /d"}}</a> 
                         <a class="post-category post-category-js" href="{% url "search_category" category=post.category %}">{{ post.category }}</a>
                     </p>
             </header>
 
                 <div class="post-description">
                     <p>
-                        {{ post.content|custom_markdown|truncatewords_html:50}}
+                        {{ post.content|custom_markdown }}
                     </p>
                 </div>
-                <a class="pure-button" href="{% url "detail" id=post.id %}">Read More >>> </a>
         </section>
-        <a href="{% url "detail" id=post.id %}#disqus_thread" data-disqus-identifier="post{{post.id}}"></a>
-    {% endfor %}
+        {% include "disqus.html" %}
 </div>
 {% endblock %}
