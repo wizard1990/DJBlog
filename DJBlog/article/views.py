@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from article.models import Post
 from datetime import datetime
 from django.http import Http404
+from django.db.models import Q
 
 def home(request):
     post_list = Post.objects.all()
@@ -39,7 +40,7 @@ def blog_search(request):
       if not keyword:
         return render(request,'home.html')
       else:
-        post_list = Post.objects.filter(title__icontains = keyword)
+        post_list = Post.objects.filter(Q(title__icontains = keyword) | Q(content__icontains = keyword))
         if len(post_list) == 0 :
           return render(request,'archives.html', {'post_list' : post_list, 'error' : True})
         else :
